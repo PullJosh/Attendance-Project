@@ -28,9 +28,15 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# ASGI setting required for using `Channels` (for websockets)
+# https://channels.readthedocs.io/en/stable/installation.html
+ASGI_APPLICATION = "attendance.asgi.application"
+
+
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'attendanceapp.apps.AttendanceappConfig',
     'django.contrib.admin',
     'django.contrib.auth',

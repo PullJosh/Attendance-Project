@@ -1,10 +1,10 @@
 To run this website, first [install Django](https://docs.djangoproject.com/en/3.2/topics/install/#installing-official-release):
 
 ```
-python -m pip install Django
+python -m pip install -r requirements.txt
 ```
 
-*(Note: You MUST use python 3! I had multiple versions on my computer, so I had to replace `python` with `python3`. It will probably depend on your exact setup.)*
+*(Note: You MUST use python 3! I had multiple versions on my computer, so I had to replace `python` with `python3`. In certain cases, the python command may be named `py`. It will probably depend on your exact setup.)*
 
 # Run the site
 Once you have Django installed, open a terminal in this directory and run the following command:

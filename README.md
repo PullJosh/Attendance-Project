@@ -6,6 +6,16 @@ python -m pip install -r requirements.txt
 
 *(Note: You MUST use python 3! I had multiple versions on my computer, so I had to replace `python` with `python3`. In certain cases, the python command may be named `py`. It will probably depend on your exact setup.)*
 
+After the modules have been installed,
+you can configure the project using these commands:
+
+```
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+Follow the prompts when given.
+
 # Run the site
 Once you have Django installed, open a terminal in this directory and run the following command:
 ```

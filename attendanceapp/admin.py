@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Person, Photo
+from .models import Person, Photo, AttendanceEvent
 
 # The models listed here will appear in the admin panel
 # (If we don't list them, they will exist in the database
@@ -44,7 +44,13 @@ class PhotoAdmin(admin.StackedInline):
     image_preview.short_description = "Image Preview"
 
 
+class AttendanceAdmin(admin.StackedInline):
+
+    extra = 0
+    model = AttendanceEvent
+
+
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
 
-    inlines = [PhotoAdmin]
+    inlines = [PhotoAdmin, AttendanceAdmin]

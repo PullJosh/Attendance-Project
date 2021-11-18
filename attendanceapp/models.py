@@ -19,3 +19,12 @@ class Photo(models.Model):
 
     def __str__(self):
         return 'Photo of %s' % self.person
+
+
+class AttendanceEvent(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+
+    event_date = models.DateTimeField('date logged')
+
+    def __str__(self) -> str:
+        return '{} logged on {}'.format(self.person.name, self.event_date)

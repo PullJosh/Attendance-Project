@@ -9,12 +9,15 @@
   <body>
     <video playsinline autoplay style="display: none"></video>
     <canvas></canvas>
+    <pre id="data_output">Connecting...</pre>
 
     <script>
       const video = document.querySelector("video");
 
       const canvas = document.querySelector("canvas");
       const ctx = canvas.getContext("2d");
+
+      const data_output = document.querySelector("#data_output");
 
       let dataFromServer = {};
 
@@ -36,9 +39,9 @@
       function render() {
         renderVideoToCanvas(canvas);
 
-        ctx.fillStyle = "red";
-        ctx.font = "24px Arial";
-        ctx.fillText(`Server says: ${dataFromServer.length}`, 10, 28);
+        // ctx.fillStyle = "red";
+        // ctx.font = "24px Arial";
+        // ctx.fillText(`Server says: ${dataFromServer.length}`, 10, 28);
       }
 
       function loop() {
@@ -60,9 +63,30 @@
         }, 1000 / FPS);
       };
 
+      ws.onclose = () => {
+        data_output.innerText = "Connection failed.";
+      };
+
       ws.onmessage = (message) => {
         dataFromServer = JSON.parse(message.data);
-        console.log("Server says:", dataFromServer);
+        console.log("Server says:", JSON.stringify(dataFromServer));
+
+        if (dataFromServer.faces.length > 0) {
+          data_output.innerText = dataFromServer.faces
+            .map(
+              (face, index) =>
+                `Face ${index + 1}:\n` +
+                face.matches
+                  .map(
+                    (match) =>
+                      `- ${Math.round(match.percentage * 100)}% ${match.person}`
+                  )
+                  .join("\n")
+            )
+            .join("\n\n");
+        } else {
+          data_output.innerText = "No faces visible.";
+        }
       };
     </script>
   </body>
